@@ -25,6 +25,9 @@ namespace Model.EF
         public DbSet<CW_Language> CW_Language { get; set; }
         public DbSet<CW_Menu_Category> CW_Menu_Category { get; set; }
         public DbSet<CW_Email> CW_Email { get; set; }
+        public DbSet<Airport> Airports { get; set; }
+        public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
        
         //user model
         public DbSet<UserProfile> UserProfiles { get; set; }

@@ -96,6 +96,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\Airport.cs" />
+    <Compile Include="EF\Booking.cs" />
     <Compile Include="EF\CW_Category.cs" />
     <Compile Include="EF\CW_Adv.cs" />
     <Compile Include="EF\CW_Article.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="EF\CW_Setting.cs" />
     <Compile Include="EF\CW_Support.cs" />
     <Compile Include="EF\MVCDbContext.cs" />
+    <Compile Include="EF\Nationality.cs" />
     <Compile Include="EF\UserProfile.cs" />
     <Compile Include="EF\webpages_Membership.cs" />
     <Compile Include="EF\WebRole.cs" />
@@ -127,6 +130,20 @@
       <DependentUpon>201608081313573_InitNews.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AirlineBrand.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\BookingPassenger.cs" />
+    <Compile Include="Models\BookingResult.cs" />
+    <Compile Include="Models\FindFlight.cs" />
+    <Compile Include="Models\Flight.cs" />
+    <Compile Include="Models\FlightDetail.cs" />
+    <Compile Include="Models\Gender.cs" />
+    <Compile Include="Models\ODataWrapper.cs" />
+    <Compile Include="Models\PassengerType.cs" />
+    <Compile Include="Models\PriceDetail.cs" />
+    <Compile Include="Models\PriceSummary.cs" />
+    <Compile Include="Models\ServerInfo.cs" />
+    <Compile Include="Models\TicketOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +173,7 @@
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

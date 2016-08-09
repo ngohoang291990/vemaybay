@@ -6,7 +6,7 @@
 <!--Menu folder-->
 @section jsFooter{
 
-   
+
     <script type="text/javascript">
 
         function rendertreetable() {
@@ -14,7 +14,7 @@
             $('#grid').html(strhtml);
 
             var tr_template = "";
-            tr_template = "<tr data-tt-id='{{ID}}' {{Parent}}> ";
+            tr_template = "<tr id='trow_{{ID}}' data-tt-id='{{ID}}' {{Parent}}> ";
             tr_template += "  <td><span class='{{Class}}' data-id='{{ID}}' id='edittitle_{{ID}}'><a href='/admin/categories/edit/{{ID}}' title='sửa'> {{Title}} </a></span></td>"; //cột tiêu đề
             tr_template += "  <td style='text-align:center;'>{{CreatedDate}}</td>"; //cột createddate
             tr_template += "  <td><center>{{IsActive}}</center></td>"; //status
@@ -25,9 +25,9 @@
             tr_template += "  </td>";
             tr_template += "  </tr>";
             //alert(tr_template);
-            $.getJSON('/Api/CategoriesApi/JTreeTable?select=', { lang: '@Session["language"].ToString()' }).done(function (data) {
+            $.getJSON('/Api/CategoriesApi/JTreeTable?select=', { lang: '@Session["language"].ToString()' }).done(function(data) {
                 var html = "";
-                $.each(data, function (i, item) {
+                $.each(data, function(i, item) {
                     var id = item.ID;
                     var title = item.Title;
                     var createddate = item.CreatedDate;
@@ -68,7 +68,7 @@
                 table += "</table>";
                 $('#grid').html(table);
                 $("#treetable").treetable({ expandable: true });
-                $("#treetable tbody tr").mousedown(function () {
+                $("#treetable tbody tr").mousedown(function() {
                     $("tr.selected").removeClass("selected");
                     $(this).addClass("selected");
                 });
@@ -77,17 +77,16 @@
         }
 
         //checked all
-        $(document).on("change", "#title-checkbox", function () {
+        $(document).on("change", "#title-checkbox", function() {
             var checkedStatus = this.checked;
             var checkbox = $(this).parents('#grid').find('tr td input:checkbox');
 
-            checkbox.each(function () {
+            checkbox.each(function() {
                 this.checked = checkedStatus;
                 if (this.checked) {
                     checkbox.attr("selected", "checked");
                     checkbox.parent('span').addClass('checked');
-                }
-                else {
+                } else {
                     checkbox.attr("selected", "");
                     checkbox.parent('span').removeClass('checked');
                 }
@@ -95,16 +94,16 @@
         });
 
 
-        $(document).ready(function () {
-            rendertreetable();          
+        $(document).ready(function() {
+            rendertreetable();
             //xóa nhiều bản ghi cùng một nút
-            $(".delete").click(function () {
+            $(".delete").click(function() {
                 var cof = confirm("Bạn có thực sự muốn xóa những bản ghi này?");
                 if (cof == true) {
                     var checkbox = $(this).parents('.box-body').find('tr td input:checkbox');
                     var bool = false;
                     var strid = "";
-                    checkbox.each(function () {
+                    checkbox.each(function() {
                         if (this.checked) {
                             bool = true;
                             strid += this.getAttribute("value") + ",";
@@ -118,23 +117,25 @@
                             sticky: false,
                             class_name: 'my_class_gritter_alert'
                         });
-                    }
-                    else {
+                    } else {
                         $.ajax(
                             {
                                 type: "POST",
                                 url: '@Url.Action("Delete", "Categories")',
-                                beforeSend: function () {
+                                beforeSend: function() {
                                     $("#rendersearch").html("<div id='dvloading' style=' text-align: center; padding: 20px 0px;'><img src='/Content/themes/website/images/ajax-loader.gif' /></div>");
                                 },
                                 async: false,
                                 dataType: "json",
                                 data: { id: strid }
                             })
-                            .done(function () {
+                            .done(function() {
                                 rendertreetable();
+                                $("#trow_" + _id).fadeTo("fast", 0, function() {
+                                    $(this).slideUp("fast", function() { $(this).remove(); });
+                                });
                             })
-                            .fail(function () {
+                            .fail(function() {
                                 $.gritter.add({
                                     title: 'Thông báo lỗi.',
                                     text: 'Có lỗi xảy ra trong quá trình cập nhật.',
@@ -147,16 +148,16 @@
 
             });
             //xóa một bản ghi
-            $(document).on("click", ".btndelte", function () {
-            //$(".btndelte").click(function () {
+            $(document).on("click", ".btndelte", function() {
+                //$(".btndelte").click(function () {
                 //alert("OK");
                 var id = $(this).attr('data');
                 $(".deleleoneitem").attr('data', id);
                 $('.modal').modal('toggle');
-               
+
                 //showalert("Bạn có thực sự muốn xóa bản ghi này?", "Cảnh báo", true);
             });
-            $(".deleleoneitem").click(function () {
+            $(".deleleoneitem").click(function() {
                 var id = $(this).attr('data');
                 $.ajax(
                     {
@@ -166,13 +167,15 @@
                         dataType: "json",
                         data: { item: id }
                     })
-                    .done(function () {
+                    .done(function() {
                         //hidealert();
                         $('.modal').hide();
                         rendertreetable();
-                        window.location.reload();
+                        $("#trow_" + _id).fadeTo("fast", 0, function () {
+                            $(this).slideUp("fast", function () { $(this).remove(); });
+                        });
                     })
-                    .fail(function () {
+                    .fail(function() {
                         $.gritter.add({
                             title: 'Thông báo lỗi.',
                             text: 'Có lỗi xảy ra trong quá trình cập nhật.',
@@ -185,20 +188,19 @@
 
         });
 
-        $(document).on("click", ".active", function () {
+        $(document).on("click", ".active", function() {
             //update isactive
 
             var id = $(this).attr('data').split(',')[0];
             var bool = $(this).attr('data').split(',')[1];
-         
-            $.ajax(
-                    {
-                        type: "POST",
-                        url: '@Url.Action("UpdateIsActive","Categories")',
-                        data: { id: id, isactive: bool }
-                    })
 
-                .done(function () {
+            $.ajax(
+                {
+                    type: "POST",
+                    url: '@Url.Action("UpdateIsActive", "Categories")',
+                    data: { id: id, isactive: bool }
+                })
+                .done(function() {
                     rendertreetable();
                     $.gritter.add({
                         title: 'Thông báo thành công.',
@@ -207,7 +209,7 @@
                         class_name: 'my_class_gritter_success'
                     });
                 })
-                .fail(function () {
+                .fail(function() {
                     $.gritter.add({
                         title: 'Thông báo lỗi.',
                         text: 'Có lỗi xảy ra trong quá trình cập nhật.',
@@ -217,16 +219,16 @@
                 })
 
         });
+
         function checksub(id, bool) {
             var checkbox = $('#grid').find('tr td input:checkbox');
-            checkbox.each(function () {
+            checkbox.each(function() {
                 var parentid = this.getAttribute("data-parent");
                 var subid = this.getAttribute("value");
                 if (parentid == id) {
                     if (bool == "checked") {
                         this.checked = true;
-                    }
-                    else {
+                    } else {
                         this.checked = false;
                     }
                     checksub(subid, bool);
@@ -235,71 +237,71 @@
         }
     </script>
     <script>
-        $(function () {
+        $(function() {
             $("#treetable").DataTable();
         });
     </script>
 
 
-}
-<section class="content-header">
-    <h1>
-        Danh mục
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li><a href="#">Danh mục</a></li>
-        @*<li class="active">Blank page</li>*@
-    </ol>
-</section>
-<!-- Main content -->
-<section class="content">
-    <!-- Default box -->
-    <div class="box box-default">
-        <div class="box-header with-border">
+    }
+    <section class="content-header">
+        <h1>
+            Danh mục
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+            <li><a href="#">Danh mục</a></li>
+            @*<li class="active">Blank page</li>*@
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box box-default">
+            <div class="box-header with-border">
 
-            <h3 class="box-title">
-                Có tất cả @if (ViewBag.CountCate != null)
-                {
-                    <span>@ViewBag.CountCate</span>
-                }
-                else
-                {
-                    <span>0</span>
-                } bản ghi
-            </h3>
+                <h3 class="box-title">
+                    Có tất cả @if (ViewBag.CountCate != null)
+                              {
+                                  <span>@ViewBag.CountCate</span>
+                              }
+                              else
+                              {
+                                  <span>0</span>
+                              } bản ghi
+                </h3>
 
-            <div class="text-left">
-                <br />
-                <a href="/admin/Categories/Add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
-                <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
+                <div class="text-left">
+                    <br/>
+                    <a href="/admin/Categories/Add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+                    <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
+                </div>
             </div>
-        </div>
-        <div class="box-body">
-            <div id="grid">
-            </div>
+            <div class="box-body">
+                <div id="grid">
+                </div>
 
 
-            <div class="modal modal-danger fade" id="myAlert" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Cảnh báo</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Bạn có thực sự muốn xóa bản ghi nay?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="javascript:void(0)" class="btn btn-outline pull-left closealert" data-dismiss="modal">Bỏ qua</a>
-                            <a href="javascript:void(0)" class="btn btn-outline deleleoneitem">Đồng ý</a>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div><!-- /.box-body -->
-        <div class="box-footer">
+                <div class="modal modal-danger fade" id="myAlert" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Cảnh báo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có thực sự muốn xóa bản ghi nay?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0)" class="btn btn-outline pull-left closealert" data-dismiss="modal">Bỏ qua</a>
+                                <a href="javascript:void(0)" class="btn btn-outline deleleoneitem">Đồng ý</a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
 
-        </div><!-- /.box-footer-->
-    </div><!-- /.box -->
-</section><!-- /.content -->
+            </div><!-- /.box-footer-->
+        </div><!-- /.box -->
+    </section><!-- /.content -->
