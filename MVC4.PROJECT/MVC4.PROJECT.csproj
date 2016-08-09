@@ -42,19 +42,17 @@
   <ItemGroup>
     <Reference Include="CKFinder, Version=2.4.1.2663, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CODEWEB\CODE.PROJECT\bin\CKFinder.dll</HintPath>
+      <HintPath>..\..\..\chesachthainguyen\www\MVC4.PROJECT\bin\CKFinder.dll</HintPath>
     </Reference>
-    <Reference Include="CKFinder_FileEditor, Version=2.1.0.1132, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CODEWEB\CODE.PROJECT\bin\CKFinder_FileEditor.dll</HintPath>
+    <Reference Include="CKFinder_FileEditor">
+      <HintPath>..\..\..\chesachthainguyen\www\MVC4.PROJECT\bin\CKFinder_FileEditor.dll</HintPath>
     </Reference>
-    <Reference Include="CKFinder_ImageResize, Version=2.1.0.1132, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CODEWEB\CODE.PROJECT\bin\CKFinder_ImageResize.dll</HintPath>
+    <Reference Include="CKFinder_ImageResize">
+      <HintPath>..\..\..\chesachthainguyen\www\MVC4.PROJECT\bin\CKFinder_ImageResize.dll</HintPath>
     </Reference>
     <Reference Include="CKFinder_Watermark, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\CODEWEB\CODE.PROJECT\bin\CKFinder_Watermark.dll</HintPath>
+      <HintPath>..\..\..\chesachthainguyen\www\MVC4.PROJECT\bin\CKFinder_Watermark.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -206,9 +204,6 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Zayko.Finance.CurrencyConverter">
-      <HintPath>..\CODE.PROJECT\bin\Zayko.Finance.CurrencyConverter.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
