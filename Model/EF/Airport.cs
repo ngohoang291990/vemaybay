@@ -24,5 +24,7 @@ namespace Model.EF
 
         [Display(Name = "Hiển thị")]
         public bool IsActive { get; set; }
+
+        //public virtual Nationality Nationality { get; set; }
     }
 }

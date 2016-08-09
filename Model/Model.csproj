@@ -129,6 +129,10 @@
     <Compile Include="Migrations\201608081313573_InitNews.Designer.cs">
       <DependentUpon>201608081313573_InitNews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608091526066_Init2.cs" />
+    <Compile Include="Migrations\201608091526066_Init2.Designer.cs">
+      <DependentUpon>201608091526066_Init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AirlineBrand.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608081313573_InitNews.resx">
       <DependentUpon>201608081313573_InitNews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608091526066_Init2.resx">
+      <DependentUpon>201608091526066_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

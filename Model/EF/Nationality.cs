@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.EF
@@ -6,18 +7,24 @@ namespace Model.EF
     [Table("Nationality")]
     public class Nationality
     {
+        //public Nationality()
+        //{
+        //    this.Airports = new HashSet<Airport>();
+          
+        //}
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Display(Name = "Nationality Name")]
+        [Display(Name = "Tên quốc gia")]
         [Required(ErrorMessage = "Yêu cầu nhập tiêu đề !")]
         [StringLength(200, ErrorMessage = "Bạn chỉ được nhập tối đa 200 ký tự !")]
         public string NationalityName { get; set; }
 
-        [Display(Name = "NationalityCode")]
+        [Display(Name = "Mã quốc gia")]
         public string NationalityCode { get; set; }
 
+        [Display(Name = "Fee")]
         public int Fee { get; set; }
 
         [Display(Name = "Mô tả")]
@@ -28,16 +35,23 @@ namespace Model.EF
         [Display(Name = "Thứ tự")]
         public int SortOrder { get; set; }
 
-
+        [Display(Name = "TimeZoo")]
         public string TimeZoo { get; set; }
 
         [Display(Name = "Icon")]
         [StringLength(250, ErrorMessage = "Bạn chỉ được nhập tối đa 250 ký tự !")]
         public string Icon { get; set; }
 
+        [Display(Name = "Embassy")]
         public string Embassy { get; set; }
+
+        [Display(Name = "Requirement")]
         public string Requirement { get; set; }
+
         public string FilterName { get; set; }
+        [Display(Name = "Tips")]
         public string Tips { get; set; }
+
+        //public virtual ICollection<Airport> Airports { get; set; }
     }
 }

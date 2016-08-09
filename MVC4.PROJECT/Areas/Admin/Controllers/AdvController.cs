@@ -1,19 +1,18 @@
-﻿using System;
+﻿using Model.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MVC4.PROJECT.Areas.Admin.Controllers;
-using Model.EF;
 
 namespace MVC4.PROJECT.Areas.Admin.Controllers
 {
-     [Authorize(Roles = "administrator, codeadmin")]
+    [Authorize(Roles = "administrator, codeadmin")]
     public class AdvController : BaseController
     {
         //
         // GET: /Admin/Adv/
-         MVCDbContext db = new MVCDbContext();
+        private MVCDbContext db = new MVCDbContext();
+
         public ActionResult Index()
         {
             var lang = Session["language"].ToString();
@@ -22,15 +21,17 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
 
             return View(adv);
         }
+
         public ActionResult Add()
         {
             return View();
         }
-         /// <summary>
-         /// thêm quảng cáo
-         /// </summary>
-         /// <param name="model"></param>
-         /// <returns></returns>
+
+        /// <summary>
+        /// thêm quảng cáo
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Exclude = "")]CW_Adv model)
@@ -55,7 +56,6 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            
             var cate = db.Set<CW_Adv>().Find(id);
             if (cate == null)
             {
@@ -63,11 +63,12 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             }
             return View(cate);
         }
-         /// <summary>
-         /// sửa quảng cáo
-         /// </summary>
-         /// <param name="adv"></param>
-         /// <returns></returns>
+
+        /// <summary>
+        /// sửa quảng cáo
+        /// </summary>
+        /// <param name="adv"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit([Bind(Include = "")]CW_Adv adv)
         {
@@ -100,11 +101,12 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-         /// <summary>
-         /// xóa quảng cáo
-         /// </summary>
-         /// <param name="id"></param>
-         /// <returns></returns>
+
+        /// <summary>
+        /// xóa quảng cáo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Delete(int id)
         {
@@ -118,11 +120,12 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
 
             return Json("Delete", JsonRequestBehavior.AllowGet);
         }
-         /// <summary>
-         /// tim kiem theo vi trí
-         /// </summary>
-         /// <param name="position"></param>
-         /// <returns></returns>
+
+        /// <summary>
+        /// tim kiem theo vi trí
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult Search(int position)
         {
@@ -137,6 +140,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             });
             return Json(item, JsonRequestBehavior.AllowGet);
         }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

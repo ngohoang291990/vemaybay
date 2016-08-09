@@ -217,14 +217,17 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AirportController.cs" />
     <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseLangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerGroupsController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NationalController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsCommentController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
@@ -339,6 +342,7 @@
     <Content Include="asset\admin\bootstrap\css\smoothness\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="asset\admin\bootstrap\css\smoothness\jquery-ui-1.7.2.custom.css" />
     <Content Include="asset\admin\js\advController.js" />
+    <Content Include="asset\admin\js\airportController.js" />
     <Content Include="asset\admin\js\album.js" />
     <Content Include="asset\admin\js\article.js" />
     <Content Include="asset\admin\js\bymenu.js" />
@@ -347,6 +351,7 @@
     <Content Include="asset\admin\js\email.js" />
     <Content Include="asset\admin\js\lstReviewsController.js" />
     <Content Include="asset\admin\js\message.js" />
+    <Content Include="asset\admin\js\nationalController.js" />
     <Content Include="asset\admin\js\news.js" />
     <Content Include="asset\admin\js\optionaboutus.js" />
     <Content Include="asset\admin\js\order.js" />
@@ -2360,6 +2365,12 @@
     <Content Include="Areas\Admin\Views\Support\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Support\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\resetpassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Airport\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Airport\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Airport\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\National\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\National\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\National\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\chesachthainguyen.pubxml" />
     <None Include="Properties\PublishProfiles\Leoshop.pubxml" />
     <None Include="Properties\PublishProfiles\myphamht.pubxml" />

@@ -1,0 +1,97 @@
+﻿@model Model.EF.Airport
+@{
+    ViewBag.Title = "Thêm sân bay";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        Thêm sân bay
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active"><a href="#">Thêm sân bay</a></li>
+
+    </ol>
+</section>
+<section class="content">
+    @using (Html.BeginForm("Add", "Airport", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+    {
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Lưu lại</button>
+                    <a href="javascript:history.go(-1);" class="btn btn-reddit"><i class="fa fa-repeat"></i> Quay lại</a>
+                </h3>
+                <div class="box-tools pull-right">
+                    @*@Html.ActionLink("Quay lại", "Index", new { @class = "btn btn-reddit" })*@
+
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div class="col-xs-12">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#activity" data-toggle="tab">Thông tin chung</a></li>
+                            @*<li><a href="#seo" data-toggle="tab">SEO</a></li>*@
+                        </ul>
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="activity">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        @Html.LabelFor(m => m.AirportName, new { @class = "control-label" })
+                                    </label>
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.AirportName, new { @class = "form-control", @placeholder = "Sân bay" })
+                                        @*<i title="Nhập tiêu đề tin (ví dụ: Việt nam mua 6 tàu ngầm của Nga)" class="icon-question-sign tip-right"></i>*@
+                                        @Html.ValidationMessageFor(m => m.AirportName)
+                                        @Html.HiddenFor(m => m.Id)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        @Html.LabelFor(m => m.AirportCode, new { @class = "control-label" })
+                                    </label>
+                                    <div class="col-sm-5">
+                                        @Html.TextBoxFor(m => m.AirportCode, new { @class = "form-control", @placeholder = "Mã sân bay" })
+                                        @*<i title="Viết mô tả ngắn gọn cho tin này" class="icon-question-sign tip-right"></i>*@
+                                        @Html.ValidationMessageFor(m => m.AirportCode)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        @Html.LabelFor(m => m.IsActive, new { @class = "control-label" })
+                                    </label>
+                                    <div class="col-sm-10">
+                                        @Html.CheckBoxFor(m => m.IsActive, new { @Checked = "Checked" })
+                                    </div>
+                                </div>
+
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        @Html.LabelFor(m => m.SortOrder, new { @class = "control-label" })
+                                    </label>
+                                    <div class="col-sm-3">
+                                        @Html.TextBoxFor(m => m.SortOrder, new { @class = "form-control", @placeholder = "Thứ tự", @Value = "1" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                @Html.AntiForgeryToken()
+
+
+            </div>
+        </div>
+    }
+
+</section>
+
+
+
