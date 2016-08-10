@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Model.EF;
 using System.Web.Mvc;
 
@@ -16,17 +17,24 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             var ariport = db.Airports.OrderBy(x => x.SortOrder);
             return View(ariport);
         }
-
+        public ActionResult View(int id)
+        {
+            var ariport = db.Airports.Find(id);
+            return View(ariport);
+        }
         public ActionResult Add()
         {
+            //nhà sản xuất
+            IEnumerable<CW_Airport> objvendors = db.Airports;
+            ViewBag.Airports = new SelectList(objvendors, "Id", "AirportName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(Airport model)
+        public ActionResult Add(CW_Airport model)
         {
-            db.Set<Airport>().Add(model);
+            db.Set<CW_Airport>().Add(model);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -38,7 +46,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Airport model)
+        public ActionResult Edit(CW_Airport model)
         {
             db.Airports.Attach(model);
             db.Entry(model).Property(a => a.AirportName).IsModified = true;
@@ -52,11 +60,11 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var article = db.Set<Airport>().Find(id);
+            var article = db.Set<CW_Airport>().Find(id);
             if (article != null)
             {
                 var catedelte = db.Airports.Attach(article);
-                db.Set<Airport>().Remove(catedelte);
+                db.Set<CW_Airport>().Remove(catedelte);
                 db.SaveChanges();
             }
 
@@ -66,10 +74,10 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateIsActive(int id, bool isactive)
         {
-            Airport art = db.Airports.Find(id);
+            CW_Airport art = db.Airports.Find(id);
             if (art != null)
             {
-                db.Set<Airport>().Attach(art);
+                db.Set<CW_Airport>().Attach(art);
                 if (isactive)
                 {
                     art.IsActive = false;
@@ -87,10 +95,10 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateOrder(int id, int order)
         {
-            Airport art = db.Airports.Find(id);
+            CW_Airport art = db.Airports.Find(id);
             if (art != null)
             {
-                db.Set<Airport>().Attach(art);
+                db.Set<CW_Airport>().Attach(art);
                 art.SortOrder = order;
                 db.SaveChanges();
             }

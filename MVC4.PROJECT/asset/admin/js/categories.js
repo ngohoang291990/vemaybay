@@ -18,7 +18,7 @@ $(document).ready(function () {
                     $.ajax(
                         {
                             type: "POST",
-                            url: '/Categories/Delete',
+                            url: '/admin/Categories/Delete',
                             beforeSend: function () {
                                 $("#rendersearch").html("<div id='dvloading' style=' text-align: center; padding: 20px 0px;'><img src='/Content/themes/admin/images/ajax-loader.gif' /></div>");
                             },
@@ -63,7 +63,7 @@ $(document).ready(function () {
         $.ajax(
             {
                 type: "POST",
-                url: '/Categories/DeleteOneItem',
+                url: '/admin/Categories/DeleteOneItem',
                 data: { item: _id }
             })
             .done(function () {

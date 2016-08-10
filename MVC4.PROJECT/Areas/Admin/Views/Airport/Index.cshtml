@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Model.EF.Airport>
+﻿@model IEnumerable<Model.EF.CW_Airport>
 @{
     ViewBag.Title = "Quản lý săn bay";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -57,7 +57,7 @@
                             {
                                 <tr id="trow_@item.Id">
                                     <td>@i.ToString()</td>
-                                    <td>@item.AirportName</td>
+                                    <td><a href="/admin/airportroute/view/@item.Id">@item.AirportName</a></td>
                                     
                                     @if (item.IsActive)
                                     {

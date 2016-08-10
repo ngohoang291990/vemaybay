@@ -23,10 +23,10 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(Nationality model)
+        public ActionResult Add(CW_Nationality model)
         {
             model.FilterName = COMMOM.Filter.FilterChar(model.NationalityName);
-            db.Set<Nationality>().Add(model);
+            db.Set<CW_Nationality>().Add(model);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -37,7 +37,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             return View(nation);
         }
         [HttpPost]
-        public ActionResult Edit(Nationality model)
+        public ActionResult Edit(CW_Nationality model)
         {
             model.FilterName = COMMOM.Filter.FilterChar(model.NationalityName);
             db.Nationalities.Attach(model);
@@ -59,11 +59,11 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var article = db.Set<Nationality>().Find(id);
+            var article = db.Set<CW_Nationality>().Find(id);
             if (article != null)
             {
                 var catedelte = db.Nationalities.Attach(article);
-                db.Set<Nationality>().Remove(catedelte);
+                db.Set<CW_Nationality>().Remove(catedelte);
                 db.SaveChanges();
             }
 
@@ -73,10 +73,10 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateIsActive(int id, bool isactive)
         {
-            Nationality art = db.Nationalities.Find(id);
+            CW_Nationality art = db.Nationalities.Find(id);
             if (art != null)
             {
-                db.Set<Nationality>().Attach(art);
+                db.Set<CW_Nationality>().Attach(art);
                 if (isactive)
                 {
                     art.IsActive = false;
@@ -94,10 +94,10 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult UpdateOrder(int id, int order)
         {
-            Nationality art = db.Nationalities.Find(id);
+            CW_Nationality art = db.Nationalities.Find(id);
             if (art != null)
             {
-                db.Set<Nationality>().Attach(art);
+                db.Set<CW_Nationality>().Attach(art);
                 art.SortOrder = order;
                 db.SaveChanges();
             }

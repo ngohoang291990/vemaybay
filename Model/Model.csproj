@@ -111,8 +111,8 @@
     <Compile Include="AirBookClient.cs" />
     <Compile Include="Converts\DecimalJsonConverter.cs" />
     <Compile Include="Converts\TimeSpanJsonConverter.cs" />
-    <Compile Include="EF\Airport.cs" />
-    <Compile Include="EF\Booking.cs" />
+    <Compile Include="EF\CW_Airport.cs" />
+    <Compile Include="EF\CW_Booking.cs" />
     <Compile Include="EF\CW_Category.cs" />
     <Compile Include="EF\CW_Adv.cs" />
     <Compile Include="EF\CW_Article.cs" />
@@ -127,8 +127,9 @@
     <Compile Include="EF\CW_NewsComment.cs" />
     <Compile Include="EF\CW_Setting.cs" />
     <Compile Include="EF\CW_Support.cs" />
+    <Compile Include="EF\CW_AirportRoute.cs" />
     <Compile Include="EF\MVCDbContext.cs" />
-    <Compile Include="EF\Nationality.cs" />
+    <Compile Include="EF\CW_Nationality.cs" />
     <Compile Include="EF\UserProfile.cs" />
     <Compile Include="EF\webpages_Membership.cs" />
     <Compile Include="EF\WebRole.cs" />

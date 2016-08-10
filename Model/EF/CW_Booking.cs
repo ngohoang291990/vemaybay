@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.EF
 {
-    [Table("Booking")]
-    public class Booking
+    [Table("CW_Booking")]
+    public class CW_Booking
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -31,7 +31,9 @@ namespace Model.EF
         public string Message { get; set; }
 
         public string InfoFly { get; set; }
+
         public string InfoCus { get; set; }
+
         public int Payment { get; set; }
         public DateTime PayDate { get; set; }
         public DateTime DateCreated { get; set; }

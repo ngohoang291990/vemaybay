@@ -14,11 +14,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="@lang">
 
-
+   
     <link href="~/Content/themes/website/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/themes/website/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/themes/website/datapicker/jquery.datetimepicker.css" rel="stylesheet" />
     <link href="~/Content/themes/website/css/template.css" rel="stylesheet" />
-
+    <link href="~/Content/themes/website/css/popupmaybay.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 
 </head>
@@ -75,11 +76,32 @@
 
     <script src="~/Scripts/website/jquery-3.1.0.min.js"></script>
     <script src="~/Scripts/website/bootstrap.min.js"></script>
-
+    <script src="~/Content/themes/website/datapicker/jquery.datetimepicker.js"></script>
     @*<script src="/Scripts/jquery.validate.min.js"></script>
         <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
         <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+      
+        $('#book-fly').click(function () {
+            if ($('#form-fly').attr('class') == 'active') {
+                $("#form-fly").removeClass('active').animate({ "right": "-999px" }, "slow");
+                $(this).removeClass('active');
+            }
+            else {
+                $(this).addClass('active');
+                $("#form-fly").addClass('active').animate({ "right": "255px" }, "slow");
+            }
+        });
+        $('#close').click(function () {
+            $('#book-fly').removeClass('active');
+            $("#form-fly").removeClass('active').animate({ "right": "-999px" }, "slow");
+        });
 
+        $("#depart").datetimepicker({ format: 'd-M-Y', timepicker: false, minDate: 0, changeYear: true, changeMonth: true, yearStart: '2016', yearEnd: '2018' });
+        $("#return").datetimepicker({ format: 'd-M-Y', timepicker: false, minDate: 0, changeYear: true, changeMonth: true, yearStart: '2016', yearEnd: '2018' });
+    });
+</script>
     @RenderSection("scripts", required: false)
 
 </body>

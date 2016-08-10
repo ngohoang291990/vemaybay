@@ -4,14 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.EF
 {
-    [Table("Nationality")]
-    public class Nationality
+    [Table("CW_Nationality")]
+    public class CW_Nationality
     {
-        //public Nationality()
-        //{
-        //    this.Airports = new HashSet<Airport>();
-          
-        //}
+       
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -52,6 +48,6 @@ namespace Model.EF
         [Display(Name = "Tips")]
         public string Tips { get; set; }
 
-        //public virtual ICollection<Airport> Airports { get; set; }
+        
     }
 }

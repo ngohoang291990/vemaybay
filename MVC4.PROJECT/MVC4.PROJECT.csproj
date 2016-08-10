@@ -218,6 +218,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvController.cs" />
     <Compile Include="Areas\Admin\Controllers\AirportController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AirportRouteController.cs" />
     <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseLangController.cs" />
@@ -2255,11 +2256,15 @@
     <Content Include="Content\themes\website\css\img\bullets.png" />
     <Content Include="Content\themes\website\css\img\loading.gif" />
     <Content Include="Content\themes\website\css\nivo-slider.css" />
+    <Content Include="Content\themes\website\css\popupmaybay.css" />
     <Content Include="Content\themes\website\css\reset.css" />
     <Content Include="Content\themes\website\css\responsize.css" />
     <Content Include="Content\themes\website\css\template.css" />
     <Content Include="Content\themes\website\css\template.min.css" />
+    <Content Include="Content\themes\website\datapicker\jquery.datetimepicker.css" />
+    <Content Include="Content\themes\website\datapicker\jquery.datetimepicker.js" />
     <Content Include="Content\themes\website\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\themes\website\images\isearch.png" />
     <Content Include="Content\Upload\images\diachiicon.png" />
     <Content Include="Content\Upload\images\emailicon.png" />
     <Content Include="Content\Upload\images\noimages.jpg" />
@@ -2385,6 +2390,7 @@
     <Content Include="Content\themes\website\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\themes\website\fonts\RobotoCondensed-Bold.ttf" />
     <Content Include="Content\themes\website\fonts\RobotoCondensed-Regular.ttf" />
+    <Content Include="Areas\Admin\Views\Airport\View.cshtml" />
     <None Include="Properties\PublishProfiles\chesachthainguyen.pubxml" />
     <None Include="Properties\PublishProfiles\Leoshop.pubxml" />
     <None Include="Properties\PublishProfiles\myphamht.pubxml" />
@@ -2474,7 +2480,6 @@
     <Folder Include="asset\ckfinder\_source\Resources\Plugins\ImageResize\Properties\" />
     <Folder Include="asset\ckfinder\_source\Resources\Plugins\Watermark\Properties\" />
     <Folder Include="asset\ckfinder\_source\Settings\" />
-    <Folder Include="Content\themes\website\images\" />
     <Folder Include="Content\themes\website\js\" />
     <Folder Include="Images\img\" />
     <Folder Include="Images\system\" />

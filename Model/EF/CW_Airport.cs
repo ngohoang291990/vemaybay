@@ -1,11 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model.EF
 {
-    [Table("Airport")]
-    public class Airport
+    [Table("CW_Airport")]
+    public class CW_Airport
     {
+        //public CW_Airport()
+        //{
+        //    this.CW_AirportRoutes = new HashSet<CW_AirportRoute>();
+        //}
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -25,6 +30,8 @@ namespace Model.EF
         [Display(Name = "Hiển thị")]
         public bool IsActive { get; set; }
 
+
+        //public virtual ICollection<CW_AirportRoute> CW_AirportRoutes { get; set; }
         //public virtual Nationality Nationality { get; set; }
     }
 }

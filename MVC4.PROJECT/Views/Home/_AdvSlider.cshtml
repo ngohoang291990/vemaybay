@@ -14,12 +14,113 @@
         </div>
 
         <div class="box-menu-option">
-            <a href="javascript:void(0)" title="Book a fly"> Book a fly </a>
+            <a href="javascript:void(0)" id="book-fly" title="Book a fly"> Book a fly </a>
             <a href="javascript:void(0)" title="Find hotels and cars"> Find hotels and cars </a>
             <a href="javascript:void(0)" title="Manage an existing booking"> Manage an existing booking </a>
             <a href="javascript:void(0)" title="Check in Online"> Check in Online </a>
             <a href="javascript:void(0)" title="Check flight status"> Check flight status </a>
             <a href="javascript:void(0)" title="See what's on the flight"> See what's on the flight </a>
+        </div>
+        <div id="form-fly">
+            <div class="form-search">
+                <a id="close">Close<span>x</span></a>
+                <h3>Book Your Trip</h3>
+                <div class="block1">
+                    <div class="title1">
+                        <strong>Round</strong>
+                        <label>
+                            <input type="radio" name="roundtrips" value="0" checked="checked" />&nbsp;Round Trip
+                        </label>
+                        <label>
+                            <input type="radio" name="roundtrips" value="1" />&nbsp;One Trip
+                        </label>
+                        <label>
+                            <input type="radio" name="roundtrips" value="2" />&nbsp;Multiple Destinations
+                        </label>
+                    </div>
+                    <div class="item-s clearfix">
+                        <div class="item-l">
+                            <span>From</span>
+                            <select id="ddlFrom" class="drop">
+                                <option value='' class='optiongroup'>Viet Nam</option>
+                                <option value='BMV'>Buon Ma Thuot (BMV)</option>
+                                <option value='CAH'>Ca Mau (CAH)</option>
+                                <option value='VCA'>Can Tho (VCA)</option>
+                                <option value='VCL'>Chu Lai (VCL)</option>
+                                <option value='VCS'>Con Dao (VCS)</option>
+                                <option value='DLI'>Da Lat (DLI)</option>
+                                <option value='DAD'>Da Nang (DAD)</option>
+                                <option value='DIN'>Dien Bien (DIN)</option>
+                                <option value='VDH'>Dong Hoi (VDH)</option>
+                                <option value='HAN'>Ha Noi (HAN)</option>
+                                <option value='HPH'>Hai Phong (HPH)</option>
+                                <option value='SGN'>Ho Chi Minh City (SGN)</option>
+                                <option value='HUI'>Hue (HUI)</option>
+                                <option value='' class='optiongroup'>Australia</option>
+                                <option value='MEL'>Melbourne (MEL)</option>
+                                <option value='SYD'>Sydney (SYD)</option>
+
+                            </select>
+                        </div>
+                        <div class="item-r">
+                            <span>Depart</span>
+                            <input type="text" id="depart" class="date" />
+                        </div>
+                    </div>
+                    <div class="item-s clearfix">
+                        <div class="item-l">
+                            <span>To</span>
+                            <select id="ddlTo" class="drop">
+                                <option value="">Select</option>
+
+                            </select>
+                        </div>
+                        <div class="item-r">
+                            <span>Return</span>
+                            <input type="text" id="return" class="date" />
+                        </div>
+                    </div>
+                </div>
+                <div class="block1">
+                    <div class="title1">
+                        <strong>Traveler(s)</strong> Children 2-12 year | Infant: Under 2 year old
+                    </div>
+                    <div class="item-s clearfix">
+                        <select id="ddlAdult">
+                            <option value="0">Adult(s)</option>
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                           
+                            @*<option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>*@
+                        </select>
+                        <select id="ddlChild">
+                            <option value="0">Children(s)</option>
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <select id="ddlInfant">
+                            <option value="0">Infant(s)</option>
+                            @for (int i = 1; i < 11; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <input type="button" id="bntSearchFlight" value="" />
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

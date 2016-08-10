@@ -4,9 +4,71 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <!--Menu folder-->
+
+    <section class="content-header">
+        <h1>
+            Danh mục
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+            <li><a href="#">Danh mục</a></li>
+            @*<li class="active">Blank page</li>*@
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="box box-default">
+            <div class="box-header with-border">
+
+                <h3 class="box-title">
+                    Có tất cả @if (ViewBag.CountCate != null)
+                              {
+                                  <span>@ViewBag.CountCate</span>
+                              }
+                              else
+                              {
+                                  <span>0</span>
+                              } bản ghi
+                </h3>
+
+                <div class="text-left">
+                    <br/>
+                    <a href="/admin/Categories/Add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+                    <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="grid">
+                </div>
+
+
+                <div class="modal modal-danger fade" id="myAlert" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">Cảnh báo</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có thực sự muốn xóa bản ghi nay?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="javascript:void(0)" class="btn btn-outline pull-left closealert" data-dismiss="modal">Bỏ qua</a>
+                                <a href="javascript:void(0)" class="btn btn-outline deleleoneitem">Đồng ý</a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+
+            </div><!-- /.box-footer-->
+        </div><!-- /.box -->
+    </section><!-- /.content -->
 @section jsFooter{
 
-
+    @*<script src="~/asset/admin/js/categories.js"></script>*@
     <script type="text/javascript">
 
         function rendertreetable() {
@@ -79,7 +141,7 @@
         //checked all
         $(document).on("change", "#title-checkbox", function() {
             var checkedStatus = this.checked;
-            var checkbox = $(this).parents('#grid').find('tr td input:checkbox');
+            var checkbox = $(this).parents('.box').find('tr td input:checkbox');
 
             checkbox.each(function() {
                 this.checked = checkedStatus;
@@ -97,17 +159,21 @@
         $(document).ready(function() {
             rendertreetable();
             //xóa nhiều bản ghi cùng một nút
-            $(".delete").click(function() {
+            $(document).on("click", ".delete", function() {
+            //$(".delete").click(function() {
                 var cof = confirm("Bạn có thực sự muốn xóa những bản ghi này?");
                 if (cof == true) {
-                    var checkbox = $(this).parents('.box-body').find('tr td input:checkbox');
+                    var checkbox = $(this).parents('.box').find('tr td input:checkbox');
+
                     var bool = false;
                     var strid = "";
                     checkbox.each(function() {
                         if (this.checked) {
                             bool = true;
                             strid += this.getAttribute("value") + ",";
+
                         }
+                        //alert(strid);
                     });
 
                     if (!bool) {
@@ -243,65 +309,4 @@
     </script>
 
 
-    }
-    <section class="content-header">
-        <h1>
-            Danh mục
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li><a href="#">Danh mục</a></li>
-            @*<li class="active">Blank page</li>*@
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="box box-default">
-            <div class="box-header with-border">
-
-                <h3 class="box-title">
-                    Có tất cả @if (ViewBag.CountCate != null)
-                              {
-                                  <span>@ViewBag.CountCate</span>
-                              }
-                              else
-                              {
-                                  <span>0</span>
-                              } bản ghi
-                </h3>
-
-                <div class="text-left">
-                    <br/>
-                    <a href="/admin/Categories/Add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
-                    <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
-                </div>
-            </div>
-            <div class="box-body">
-                <div id="grid">
-                </div>
-
-
-                <div class="modal modal-danger fade" id="myAlert" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Cảnh báo</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Bạn có thực sự muốn xóa bản ghi nay?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="javascript:void(0)" class="btn btn-outline pull-left closealert" data-dismiss="modal">Bỏ qua</a>
-                                <a href="javascript:void(0)" class="btn btn-outline deleleoneitem">Đồng ý</a>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-            </div><!-- /.box-body -->
-            <div class="box-footer">
-
-            </div><!-- /.box-footer-->
-        </div><!-- /.box -->
-    </section><!-- /.content -->
+}

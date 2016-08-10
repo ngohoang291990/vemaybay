@@ -1,12 +1,29 @@
 ﻿using Model.EF;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Mvc;
+using Model;
+using Model.Models;
 
 namespace MVC4.PROJECT.Controllers
 {
     public class HomeController : BaseController
     {
+        private AirBookClient sut;
+
+        public HomeController()
+        {
+            var htpClientHandler = new HttpClientHandler();
+            //htpClientHandler.UseProxy = true;
+            //htpClientHandler.Proxy = new WebProxy("http://localhost:8888/", false);
+
+            var httpClient = new HttpClient(htpClientHandler);
+            this.sut = new AirBookClient(httpClient);
+            this.sut.SetAuthenticate(new AuthenticateInfo() { Username = "vnairlines.org", Password = "KLmc8a5RVj" });
+            this.sut.SetServerInfo(new ServerInfo() { ApiServer = "http://api.atvietnam.vn" });
+        }
+
         public ActionResult Index()
         {
             //var lang = Session["culture"].ToString();

@@ -1,0 +1,50 @@
+﻿@model Model.EF.CW_Airport
+@{
+    ViewBag.Title = "Thông tin san bay";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section class="content-header">
+    <h1>
+        Quản lý sân bay
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+        <li class="active"><a href="#">Sân bay</a></li>
+
+    </ol>
+</section>
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        @*Có tất cả @if (Model != null)
+                        {
+                            <span>@Model.Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        } bản ghi*@
+                    </h3>
+                    <div class="text-left">
+                        <br />
+                        <a href="/admin/airport/add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+                        <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
+                    </div>
+
+
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+</section>

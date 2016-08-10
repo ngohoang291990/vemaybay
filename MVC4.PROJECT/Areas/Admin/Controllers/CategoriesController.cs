@@ -16,7 +16,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         public ActionResult Index()
         {
             List<CW_Category> objbind = new List<CW_Category>();
-            ViewBag.ListCateEdit = GetTreeTable(null, objbind, "");
+            ViewBag.ListCateEdit = GetTreeTable(null, objbind, "",null);
             IEnumerable<CW_Category> cate = db.CW_Category;
             ViewBag.CountCate = cate.ToList().Count();
             return View();
@@ -25,7 +25,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         public ActionResult Add()
         {
             List<CW_Category> objbind = new List<CW_Category>();
-            ViewBag.ListCateEdit = new SelectList(GetTreeTable(null, objbind, ""), "ID", "Title");
+            ViewBag.ListCateEdit = new SelectList(GetTreeTable(null, objbind, "",null), "ID", "Title");
             ViewBag.SelectListItems = new MultiSelectList(db.CW_Menu.ToList<CW_Menu>(), "MenuCode", "Title");
             return View();
         }
@@ -64,12 +64,12 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         /// <param name="objcate"></param>
         /// <returns></returns>
         [NonAction]
-        public List<CW_Category> catechil(int? parent, List<CW_Category> objcate)
+        public List<CW_Category> catechil(int? parent, List<CW_Category> objcate, int? idCate)
         {
             List<CW_Category> objbind = new List<CW_Category>();
             foreach (CW_Category info in objcate)
             {
-                if (info.ParentID == parent)
+                if (info.ParentID == parent && info.ID != idCate)
                 {
                     objbind.Add(info);
                 }
@@ -84,11 +84,11 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         /// <param name="space"></param>
         /// <returns></returns>
         [NonAction]
-        public List<CW_Category> GetTreeTable(int? parent, List<CW_Category> objcate, string space)
+        public List<CW_Category> GetTreeTable(int? parent, List<CW_Category> objcate, string space, int? idCate)
         {
             var lang = Session["language"].ToString();
             IEnumerable<CW_Category> objtemp = db.CW_Category.Where(x => x.LanguageCode.Equals(lang)).OrderBy(x => x.Order);
-            List<CW_Category> objbind = catechil(parent, objtemp.ToList());
+            List<CW_Category> objbind = catechil(parent, objtemp.ToList(),idCate);
             if (objbind != null && objbind.Count > 0)
             {
                 CW_Category objtab = null;
@@ -97,7 +97,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
                     objtab = (CW_Category)objbind[i];
                     objtab.Title = space + objtab.Title;
                     objcate.Add(objtab);
-                    GetTreeTable(objtab.ID, objcate, space + "--- ");
+                    GetTreeTable(objtab.ID, objcate, space + "--- ",idCate);
                 }
             }
             return objcate;
@@ -107,32 +107,43 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         {
             //danh mục cha
             List<CW_Category> objbind = new List<CW_Category>();
-            ViewBag.ListCateEdit = new SelectList(GetTreeTable(null, objbind, ""), "ID", "Title");
 
             var cate = db.Set<CW_Category>().Find(id);
-            cate.Title = cate.Title.Replace("--- ", "");
 
-            #region "kiểu danh mục"
-            //tất cả menu
-            ViewBag.AllSelectListItems = new MultiSelectList(db.CW_Menu.ToList<CW_Menu>(), "MenuCode", "Title");
-            //menu được chọn
-            List<CW_Menu> selectlist = new List<CW_Menu>();
-            IEnumerable<CW_Menu_Category> listcatemenu = db.CW_Menu_Category.Where(a => a.CategoryID == id);
-
-            foreach (CW_Menu_Category item in listcatemenu)
+            if (cate != null)
             {
-                var menu = db.Set<CW_Menu>().Find(item.MenuCode);
-                if (menu != null)
+                ViewBag.ListCateEdit = new SelectList(GetTreeTable(null, objbind, "", id), "ID", "Title");
+
+                cate.Title = cate.Title.Replace("--- ", "");
+
+                #region "kiểu danh mục"
+                //tất cả menu
+                ViewBag.AllSelectListItems = new MultiSelectList(db.CW_Menu.ToList<CW_Menu>(), "MenuCode", "Title");
+
+                //menu được chọn
+                List<CW_Menu> selectlist = new List<CW_Menu>();
+                IEnumerable<CW_Menu_Category> listcatemenu = db.CW_Menu_Category.Where(a => a.CategoryID == id);
+
+                foreach (CW_Menu_Category item in listcatemenu)
                 {
-                    selectlist.Add((CW_Menu)menu);
+                    var menu = db.Set<CW_Menu>().Find(item.MenuCode);
+                    if (menu != null)
+                    {
+                        selectlist.Add((CW_Menu)menu);
+                    }
                 }
+                if (selectlist.Count > 0)
+                {
+                    ViewBag.SelectListItems = selectlist;
+                }
+
+                #endregion
+                return View(cate);
             }
-            if (selectlist.Count > 0)
+            else
             {
-                ViewBag.SelectListItems = selectlist;
+                return HttpNotFound();
             }
-            #endregion
-            return View(cate);
         }
         /// <summary>
         /// sua danh muc
