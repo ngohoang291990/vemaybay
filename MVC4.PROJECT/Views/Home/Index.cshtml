@@ -8,17 +8,11 @@
 }
 
 @Html.Action("_AdvSlider","Home")
-
-
-
-
 @section styles{
     <link href="~/Content/themes/website/css/nivo-slider.css" rel="stylesheet" />
 }
-
 @section scripts{
     <script src="~/Scripts/website/jquery.nivo.slider.js"></script>
-
     <script>
         $(document).ready(function () {
             $('#slider-home').nivoSlider({
