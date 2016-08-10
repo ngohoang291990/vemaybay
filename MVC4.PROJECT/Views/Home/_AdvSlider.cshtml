@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Model.EF.CW_Adv>
+
+@if (Model != null && Model.Any())
+{
+    <div class="box-slider col-xs-12">
+
+        <div id="slider-home" class="nivoSlider">
+            @foreach (var item in Model)
+            {
+                <a href="@item.Link" title="@item.Title" target="@item.Target">
+                    <img src="@item.Image" alt="@item.Title" class="img-responsive center-block" />
+                </a>
+            }
+        </div>
+
+        <div class="box-menu-option">
+            <a href="javascript:void(0)" title="Book a fly"> Book a fly </a>
+            <a href="javascript:void(0)" title="Find hotels and cars"> Find hotels and cars </a>
+            <a href="javascript:void(0)" title="Manage an existing booking"> Manage an existing booking </a>
+            <a href="javascript:void(0)" title="Check in Online"> Check in Online </a>
+            <a href="javascript:void(0)" title="Check flight status"> Check flight status </a>
+            <a href="javascript:void(0)" title="See what's on the flight"> See what's on the flight </a>
+        </div>
+
+    </div>
+}
+

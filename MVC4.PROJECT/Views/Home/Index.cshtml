@@ -3,10 +3,41 @@
     ViewBag.Title = COMMOM.Interface.ISetting.GetSettingValue("SettingTitle" + lang);
     ViewBag.Keywords = COMMOM.Interface.ISetting.GetSettingValue("SettingMetakeyword" + lang);
     ViewBag.Description = COMMOM.Interface.ISetting.GetSettingValue("SettingMetadescription" + lang);
+    
     Layout = "~/Views/Shared/_Layout.cshtml";  
 }
-<div class="row">
-    <div class="title">
-        <h3>Facebook</h3>
-    </div>
-</div>
+
+@Html.Action("_AdvSlider","Home")
+
+
+
+
+@section styles{
+    <link href="~/Content/themes/website/css/nivo-slider.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/website/jquery.nivo.slider.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#slider-home').nivoSlider({
+                effect: 'random',                 // Specify sets like: 'fold,fade,sliceDown'
+                slices: 15,                     // For slice animations
+                boxCols: 9,                     // For box animations
+                boxRows: 5,                     // For box animations
+                animSpeed: 500,                 // Slide transition speed
+                pauseTime: 5000,                 // How long each slide will show
+                startSlide: 0,                     // Set starting Slide (0 index)
+                directionNav: false,             // Next & Prev navigation
+                controlNav: false,                 // 1,2,3... navigation
+                controlNavThumbs: false,         // Use thumbnails for Control Nav
+                pauseOnHover: true,             // Stop animation while hovering
+                manualAdvance: false,             // Force manual transitions
+                prevText: '<i class=\"fa fa-chevron-left\"></i>',
+                nextText: '<i class=\"fa fa-chevron-right\"></i>',
+                randomStart: false,             // Start on a random slide
+            });
+        });
+    </script>
+}

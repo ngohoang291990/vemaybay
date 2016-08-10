@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Model.EF.CW_Category>
+
+@if(Model != null && Model.Any())
+{
+    foreach (var item in Model.Take(6))
+    {
+        <div class="box-footer col-xs-12">
+            <h3 class="title-box-footer"> @item.Title </h3>
+            @if(item.SubCategories.Any())
+            {
+                <ul>
+                    @foreach (var itemSub in item.SubCategories)
+                    {
+                        <li> <a href="@COMMOM.Interface.Helper.RenderURL(item.TypeCode, item.ID, item.CategoryCode, item.Link)" title="@itemSub.Title"> @itemSub.Title </a> </li>
+                    }
+                </ul>
+            }      
+        </div>
+    }
+}

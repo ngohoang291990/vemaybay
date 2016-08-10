@@ -1,0 +1,17 @@
+﻿
+@model IEnumerable<Model.EF.CW_Category>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@COMMOM.Interface.Helper.RenderURL(item.TypeCode, item.ID, item.CategoryCode, item.Link)" title="@item.Title">
+                    <span><img src="@item.Icon" alt="@item.Title"  title="@item.Title" class="img-responsive center-block" /></span>
+                    @item.Title
+                </a>
+            </li>
+        }
+    </ul>
+}

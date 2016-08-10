@@ -14,45 +14,73 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="@lang">
 
-  
+
+    <link href="~/Content/themes/website/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/website/css/reset.css" rel="stylesheet" />
+    <link href="~/Content/themes/website/css/template.css" rel="stylesheet" />
+
+    @RenderSection("styles", required: false)
+
 </head>
 
-<body style="" class="home">
+<body>
+    <div class="bg-header-web">
 
-    <!--Ket thuc nav hien thi tren mobile-->
-    @*<nav id="menu" class="hidden-lg hidden-md">
-            @Html.Action("_MenuTopMobile", "Home")
-        </nav>*@
-    <div id="pages">
+        <div class="header-web container">
 
-        <div class="container">
-            <div id="box-wapper" class="clear-fix">
-
+            <div class="logo-web">
+                <a href="/" title="Trang chủ">
+                    <img src="@COMMOM.Interface.ISetting.GetSettingValue("SettingBanner" + lang )" alt="Logo" title="Trang chủ" class="img-responsive" />
+                </a>
+            </div>
 
 
-                @RenderBody()
+            <div class="menu-main">
+                @Html.Action("_MenuMain","Home")
+            </div>
 
+        </div>
+
+    </div>
+
+    <div class="content-web container">
+        <div class="row">
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <div class="bg-footer-web">
+        <div class="footer-web container">
+            <div class="row">
+
+                @Html.Action("_MenuFooter","Home")
+
+                <div class="box-footer-bottom col-xs-12">
+                    @Html.Raw(COMMOM.Interface.ISetting.GetSettingValue("SettingFooter" + lang))
+                </div>
 
             </div>
         </div>
     </div>
 
-    <style>
-    </style>
+
 
 
 
     <!--start slider -->
 
-    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
-    <script src="/Scripts/jquery.validate.min.js"></script>
-    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 
 
+    <script src="~/Scripts/website/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/website/bootstrap.min.js"></script>
 
-
+    @*<script src="/Scripts/jquery.validate.min.js"></script>
+        <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
 
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
