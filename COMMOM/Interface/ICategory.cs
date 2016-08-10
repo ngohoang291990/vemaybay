@@ -12,7 +12,30 @@ namespace COMMOM.Interface
         static MVCDbContext db = new MVCDbContext();
         public static CW_Category objCate = null;
         public static List<CW_Category> listCategory = new List<CW_Category>();
+        public static bool AirportChecked(List<CW_AirportRoute> obj, int attId,int id2)
+        {
+            bool flag = false;
+            if (obj != null)
+            {
+                if (obj.Count > 0)
+                {
+                    foreach (CW_AirportRoute item in obj)
+                    {
+                        if (item.AirportID1 == attId)
+                        {
+                            if (item.AirportID2==id2)
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
 
+                    }
+                }
+            }
+
+            return flag;
+        }
         #region "list categoryby"
 
         [NonAction]

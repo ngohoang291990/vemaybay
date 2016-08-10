@@ -47,6 +47,7 @@
                                         @Html.TextBoxFor(m => m.AirportName, new { @class = "form-control", @placeholder = "Sân bay" })
                                         @*<i title="Nhập tiêu đề tin (ví dụ: Việt nam mua 6 tàu ngầm của Nga)" class="icon-question-sign tip-right"></i>*@
                                         @Html.ValidationMessageFor(m => m.AirportName)
+                                        @Html.ValidationMessageFor(m => m.Id)
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -68,7 +69,7 @@
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">
                                         @Html.LabelFor(m => m.SortOrder, new { @class = "control-label" })
@@ -77,7 +78,37 @@
                                         @Html.TextBoxFor(m => m.SortOrder, new { @class = "form-control", @placeholder = "Thứ tự", @Value = "1" })
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Điểm đến
+                                    </label>
+                                    <div class="col-sm-10">
+                                        @if (ViewBag.Airports != null)
+                                        {
+                                            foreach (var item in ViewBag.Airports as IEnumerable<Model.EF.CW_Airport>)
+                                            {
+                                                if (COMMOM.Interface.ICategory.AirportChecked(ViewBag.SelectListItems as List<Model.EF.CW_AirportRoute>, Model.Id,item.Id))
+                                                {
+                                                    <div class="">
+                                                        <input type="checkbox" name="lstIdDen" value="@item.Id" checked="checked"> @item.AirportName
+                                                    </div>
+                                                    
+                                                }
+                                                else
+                                                {
+                                                    <div class="">
+                                                        <input type="checkbox" name="lstIdDen" value="@item.Id">@item.AirportName
+                                                    </div>
+                                                    
+                                                }
+                                                @*<div class="">
+                                                        <input data-id="@item.Id" type="checkbox" name="lstIdDen" value="@item.Id" />@item.AirportName
+                                                    </div>*@
+                                            }
+                                        }
 
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
