@@ -1,16 +1,14 @@
-﻿using System;
+﻿using DotNetOpenAuth.AspNet;
+using Microsoft.Web.WebPages.OAuth;
+using Model.EF;
+using MVC4.PROJECT.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
-using Model.EF;
-using MVC4.PROJECT.Filters;
-using MVC4.PROJECT.Models;
 using WebMatrix.WebData;
 
 namespace MVC4.PROJECT.Controllers
@@ -19,10 +17,12 @@ namespace MVC4.PROJECT.Controllers
     //[InitializeSimpleMembership]
     public class AccountController : BaseController
     {
-        MVCDbContext db = new MVCDbContext();
+        private MVCDbContext db = new MVCDbContext();
         //
         // GET: /Account/Login
+
         #region "login & logout & register"
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -52,7 +52,9 @@ namespace MVC4.PROJECT.Controllers
             ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng !");
             return View(model);
         }
-        #endregion
+
+        #endregion "login & logout & register"
+
         //
         // POST: /Account/LogOff
 
@@ -63,11 +65,13 @@ namespace MVC4.PROJECT.Controllers
 
             return Redirect(HttpContext.Request.UrlReferrer.PathAndQuery);
         }
+
         [ChildActionOnly]
         public PartialViewResult _RegisterModule()
         {
             return PartialView();
         }
+
         //
         // GET: /Account/Register
 
@@ -135,10 +139,12 @@ namespace MVC4.PROJECT.Controllers
             }
             return Json(respone, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult RegisterComplete()
         {
             return View();
         }
+
         #region "Change & reset password"
 
         [COMMOM.ClientAuthorize]
@@ -239,7 +245,6 @@ namespace MVC4.PROJECT.Controllers
                     string body = "<b>Dưới đây là mật khẩu mới của bạn, hãy lưu trữ và đăng nhập bằng mật khẩu này</b><br/>" + newpassword; //edit it
                     try
                     {
-
                         COMMOM.Interface.Helper.SendMail("HoangTan", subject, body, emailid);
                         TempData["Message"] = "Mail đã được gửi.";
                     }
@@ -264,7 +269,7 @@ namespace MVC4.PROJECT.Controllers
             return View();
         }
 
-        #endregion
+        #endregion "Change & reset password"
 
         #region "profile"
 
@@ -294,14 +299,8 @@ namespace MVC4.PROJECT.Controllers
             return PartialView("_ProfileUser", users);
         }
 
-        #endregion
+        #endregion "profile"
 
-        #region "lịch sử đơn hàng"
-
-      
-
-
-        #endregion
         //
         // POST: /Account/Disassociate
 
@@ -538,6 +537,7 @@ namespace MVC4.PROJECT.Controllers
         }
 
         #region Helpers
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -611,6 +611,7 @@ namespace MVC4.PROJECT.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-        #endregion
+
+        #endregion Helpers
     }
 }

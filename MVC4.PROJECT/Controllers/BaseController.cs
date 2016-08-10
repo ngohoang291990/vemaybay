@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using COMMOM.Interface;
 using System.Web.Mvc;
-using COMMOM.Interface;
 
 namespace MVC4.PROJECT.Controllers
 {
