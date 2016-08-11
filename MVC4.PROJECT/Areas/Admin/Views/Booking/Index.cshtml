@@ -1,17 +1,18 @@
-﻿@model IEnumerable<Model.EF.CW_Article>
+﻿@model IEnumerable<Model.EF.CW_Booking>
 @{
-    ViewBag.Title = "Quản lý bài viết";
+    ViewBag.Title = "Quản lý booking vé";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     int i = 1;
 }
 
+
 <section class="content-header">
     <h1>
-        Quản lý bài viết
+        Quản lý Booking
     </h1>
     <ol class="breadcrumb">
         <li><a href="/admin"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-        <li><a href="#">Bài viết</a></li>
+        <li><a href="#">Booking</a></li>
 
     </ol>
 </section>
@@ -28,11 +29,11 @@
                 else
                 {
                     <span>0</span>
-                } bài viết
+                } banr ghi
             </h3>
             <div class="text-left">
                 <br />
-                <a href="/admin/article/add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+                @*<a href="/admin/booking/add" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>*@
                 <a href="javascript:void(0)" class="btn btn-warning delete"><i class="fa fa-trash"></i> Xóa tất cả</a>
             </div>
 
@@ -43,10 +44,9 @@
                 <thead>
                     <tr>
                         <th style="width:20px;">STT</th>
-                        <th>Tiêu đề</th>
-                        <th>Danh mục</th>
-                        <th><center>Hiển thị</center></th>
-                        <th>Thứ tự</th>
+                        <th>Họ tên</th>
+                        <th><center>Ngày booking</center></th>
+                        @*<th>Thứ tự</th>*@
                         <th width="100px"></th>
                         <td><center><input type="checkbox" id="title-checkbox" name="title-checkbox" /></center></td>
                     </tr>
@@ -54,36 +54,22 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr id="trow_@item.ID">
+                        <tr id="trow_@item.Id">
                             <td>@i.ToString()</td>
 
-                            <td data-id="@item.ID" id="edittitle_@item.ID">@item.Title</td>
-                            <td><center>@item.Category.Title.Replace("--- ", "")</center></td>
-
-                            @if (item.IsActive)
-                            {
-                                <td>
-                                    <center><span data-title="@item.ID" class='label label-success active' data-boo="@item.IsActive">V</span></center>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    <center><span data-title="@item.ID" class='label label-danger active' data-boo="@item.IsActive">X</span></center>
-                                </td>
-                            }
-
-                            <td><center><input type="number" data-id="@item.ID" class="txtorder" value="@item.Order" style="width:60px;" /></center></td>
+                            <td data-id="@item.Id">@item.FullName</td>
+                          
+                            <td><center>@item.DateCreated</center></td>
                             <td>
                                 <center>
-                                    <a href="/admin/article/edit/@item.ID" class='btn btn-mini btn-primary'><i class="fa fa-edit"></i></a>
+                                    <a href="/admin/booking/view/@item.Id" class='btn btn-primary' style="padding: 0px; height: 20px;"> Xem chi tiết</a>
 
-                                    <a href="#" data="@item.ID" class='btn btn-mini btn-danger btndelte'><i class="fa fa-trash"></i></a>
+                                    <a href="#" data="@item.Id" class='btn btn-mini btn-danger btndelte'><i class="fa fa-trash"></i></a>
                                 </center>
                             </td>
-                            <td><center><input type="checkbox" value="@item.ID" /></center></td>
+                            <td><center><input type="checkbox" value="@item.Id" /></center></td>
                         </tr>
-                            i = i + 1;
+                        i = i + 1;
                     }
 
 
@@ -118,5 +104,5 @@
             $("#example1").DataTable();
         });
     </script>
-    <script src="/asset/admin/js/article.js"></script>
+    @*<script src="/asset/admin/js/article.js"></script>*@
 }

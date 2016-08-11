@@ -89,14 +89,14 @@
                                             {
                                                 if (COMMOM.Interface.ICategory.AirportChecked(ViewBag.SelectListItems as List<Model.EF.CW_AirportRoute>, Model.Id,item.Id))
                                                 {
-                                                    <div class="">
+                                                    <div class="" style="float: left; width: 30%;">
                                                         <input type="checkbox" name="lstIdDen" value="@item.Id" checked="checked"> @item.AirportName
                                                     </div>
                                                     
                                                 }
                                                 else
                                                 {
-                                                    <div class="">
+                                                    <div class="" style="float: left; width: 30%;">
                                                         <input type="checkbox" name="lstIdDen" value="@item.Id">@item.AirportName
                                                     </div>
                                                     

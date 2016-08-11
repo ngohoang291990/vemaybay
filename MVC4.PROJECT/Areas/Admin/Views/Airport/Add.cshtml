@@ -86,7 +86,7 @@
                                         {
                                             foreach (var item in ViewBag.Airports as IEnumerable<Model.EF.CW_Airport>)
                                             {
-                                                <div class="">
+                                                <div class="" style="float: left; width: 30%;">
                                                     <input data-id="@item.Id" type="checkbox" name="lstIdDen" value="@item.Id"/>@item.AirportName
                                                 </div>
                                             }

@@ -34,22 +34,37 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(CW_Airport model, List<int> lstIdDen)
         {
-
-            db.Set<CW_Airport>().Add(model);
-            db.SaveChanges();
-            for (int i = 0; i < lstIdDen.Count; i++)
+           
+            if (ModelState.IsValid)
             {
-                if (!lstIdDen[i].ToString().Equals(""))
-                {
-                    CW_AirportRoute a = new CW_AirportRoute();
+                db.Set<CW_Airport>().Add(model);
 
-                    a.AirportID1 = model.Id;
-                    a.AirportID2 = lstIdDen[i];
-                    db.Set<CW_AirportRoute>().Add(a);
-                    db.SaveChanges();
+                if (lstIdDen != null)
+                {
+                    for (int i = 0; i < lstIdDen.Count; i++)
+                    {
+                        if (!lstIdDen[i].ToString().Equals(""))
+                        {
+                            CW_AirportRoute a = new CW_AirportRoute();
+
+                            a.AirportID1 = model.Id;
+                            a.AirportID2 = lstIdDen[i];
+                            db.Set<CW_AirportRoute>().Add(a);
+                            //db.SaveChanges();
+                        }
+                    }
                 }
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            else
+            {
+                IEnumerable<CW_Airport> objvendors = db.Airports;
+                ViewBag.Airports = objvendors;
+                return View(model);
+            }
+            
         }
 
         public ActionResult Edit(int id)
@@ -70,44 +85,72 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(CW_Airport model, List<int> lstIdDen)
         {
-            IEnumerable<CW_Airport> objmenunoselect = db.Airports;
+            //IEnumerable<CW_Airport> objmenunoselect = db.Airports;
             if (lstIdDen != null)
             {
-                CW_AirportRoute obj = null;
-                CW_AirportRoute addmenucate = null;
-                foreach (int str in lstIdDen)
+               
+                var lstAir = db.AirportRoutes.Where(x => x.AirportID1 == model.Id);
+                if (lstAir.Any())
                 {
-                    obj = db.AirportRoutes.Where(x => x.AirportID1 == model.Id && x.AirportID2.Equals(str)).FirstOrDefault();
-
-                    if (obj != null)
+                    foreach (var str in lstAir)
                     {
-                       break;
+                        var catedelte = db.AirportRoutes.Attach(str);
+                        db.AirportRoutes.Remove(catedelte);
+                       
                     }
-                    else
+                }
+                for (int i = 0; i < lstIdDen.Count; i++)
+                {
+                    if (!lstIdDen[i].ToString().Equals(""))
                     {
-                        addmenucate = new CW_AirportRoute();
-                        addmenucate.AirportID1 = model.Id;
-                        addmenucate.AirportID2 = str;
-                        db.Set<CW_AirportRoute>().Add(addmenucate);
+                        CW_AirportRoute a = new CW_AirportRoute();
+
+                        a.AirportID1 = model.Id;
+                        a.AirportID2 = lstIdDen[i];
+                        db.Set<CW_AirportRoute>().Add(a);
                         db.SaveChanges();
                     }
-                    objmenunoselect = objmenunoselect.Where(x => !x.Id.Equals(str));
                 }
+                //foreach (int str in lstIdDen)
+                //{
+
+                //    var lst = db.AirportRoutes.SingleOrDefault(x => x.AirportID1 == model.Id && x.AirportID2 == str);
+                //    if (lst != null)
+                //    {
+                //        db.AirportRoutes.Remove(lst);
+                //        db.SaveChanges();
+                //    }
+
+                //    //IEnumerable<CW_AirportRoute> lstai= from air in db.AirportRoutes
+                //    //    where air.AirportID1 == model.Id && air.AirportID2.Equals(str)
+                //    //    select air;
+
+                //    //if (lstai != null)
+                //    //{
+                //    //    addmenucate = new CW_AirportRoute();
+                //    //    addmenucate.AirportID1 = model.Id;
+                //    //    addmenucate.AirportID2 = str;
+                //    //    db.Set<CW_AirportRoute>().Add(addmenucate);
+                //    //    db.SaveChanges();
+                //    //}
+
+                //    //objmenunoselect = objmenunoselect.Where(x => !x.Id.Equals(str));
+                //}
                 //menu không được chọn nữa, nhưng đang tồn tại trong bảng CW_AirportRoute thì xóa đi
-                if (lstIdDen != null)
-                {
-                    CW_AirportRoute objMenuCategory = null;
-                    foreach (var item in objmenunoselect)
-                    {
-                        objMenuCategory = db.AirportRoutes.Where(x => x.AirportID1 == model.Id && x.AirportID2.Equals(item.Id)).FirstOrDefault();
-                        if (objMenuCategory != null)
-                        {
-                            db.AirportRoutes.Attach(objMenuCategory);
-                            db.Set<CW_AirportRoute>().Remove(objMenuCategory);
-                        }
-                    }
-                    db.SaveChanges();
-                }
+                //if (lstIdDen != null)
+                //{
+                //    CW_AirportRoute objMenuCategory = null;
+                //    foreach (var item in objmenunoselect)
+                //    {
+                //        objMenuCategory = db.AirportRoutes.Where(x => x.AirportID1 == model.Id && x.AirportID2.Equals(item.Id)).FirstOrDefault();
+                //        if (objMenuCategory != null)
+                //        {
+                //            db.AirportRoutes.Attach(objMenuCategory);
+                //            db.Set<CW_AirportRoute>().Remove(objMenuCategory);
+                //        }
+                //    }
+                //    db.SaveChanges();
+                //}
             }
             //else
             //{
@@ -121,7 +164,7 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
             //    }
             //    db.SaveChanges();
             //}
-            
+
             db.Airports.Attach(model);
             db.Entry(model).Property(a => a.AirportName).IsModified = true;
             db.Entry(model).Property(a => a.AirportCode).IsModified = true;

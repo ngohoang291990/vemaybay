@@ -2391,6 +2391,8 @@
     <Content Include="Content\themes\website\fonts\RobotoCondensed-Bold.ttf" />
     <Content Include="Content\themes\website\fonts\RobotoCondensed-Regular.ttf" />
     <Content Include="Areas\Admin\Views\Airport\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\View.cshtml" />
     <None Include="Properties\PublishProfiles\chesachthainguyen.pubxml" />
     <None Include="Properties\PublishProfiles\Leoshop.pubxml" />
     <None Include="Properties\PublishProfiles\myphamht.pubxml" />

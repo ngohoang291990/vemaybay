@@ -15,9 +15,15 @@ namespace MVC4.PROJECT.Areas.Admin.Controllers
         MVCDbContext db =new MVCDbContext();
         public ActionResult Index()
         {
-
-            return View();
+            var booking = db.Bookings.OrderByDescending(x => x.DateCreated);
+            return View(booking);
         }
 
+
+        public ActionResult View(int id)
+        {
+            var lstBook = db.Bookings.Find(id);
+            return View(lstBook);
+        }
     }
 }
